@@ -5,10 +5,6 @@
 # Product ID of the version of SQL server you're installing
 MSSQL_PID='express'
 
-# Install SQL Server Agent (recommended)
-SQL_INSTALL_AGENT='y'
-
-
 if [ -z $DB_PASSWORD ]
 then
   echo Environment variable DB_PASSWORD must be set for unattended install
@@ -41,13 +37,6 @@ echo Adding SQL Server tools to your path...
 echo PATH="$PATH:/opt/mssql-tools/bin" >> ~/.bash_profile
 echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 source ~/.bashrc
-
-# Optional SQL Server Agent installation:
-if [ ! -z $SQL_INSTALL_AGENT ]
-then
-  echo Installing SQL Server Agent...
-  sudo apt-get install -y mssql-server-agent
-fi
 
 # Configure firewall to allow TCP port 1433:
 echo Configuring UFW to allow traffic on port 1433...
