@@ -33,6 +33,7 @@ sudo rm /home/ubuntu/backup/backup.zip
 sudo zip -r /home/ubuntu/backup/backup.zip /var/opt/mssql/data/backups
 
 # Upload Para Bucket AWS S3
+echo 'Starting upload...'
 sudo aws s3 cp /home/ubuntu/backup/backup.zip s3://$BACKUP_BUCKET/backup-$CUSTOMER-$(date +%Y%m%d-%H%M).zip
 
 sleep 5s
