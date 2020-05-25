@@ -6,6 +6,8 @@ echo " "
 echo "-----------------------------------------------------------------------------"
 echo "------------------- $(date) -------------------"
 
+HOME="/root/"
+
 # Inicio Do Backup
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
 	DECLARE @name VARCHAR(50) \
