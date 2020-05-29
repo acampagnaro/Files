@@ -8,6 +8,10 @@ echo "------------------- $(date) -------------------"
 
 HOME="/root/"
 
+# Deletando backup anterior
+sudo rm /var/opt/mssql/data/backups/*
+sudo rm /home/ubuntu/backup/backup.zip
+
 # Inicio Do Backup
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
 	DECLARE @name VARCHAR(50) \
@@ -31,7 +35,6 @@ HOME="/root/"
 	DEALLOCATE db_cursor";
 
 # Compactação .ZIP
-sudo rm /home/ubuntu/backup/backup.zip
 sudo zip -r /home/ubuntu/backup/backup.zip /var/opt/mssql/data/backups
 
 # Upload Para Bucket AWS S3
