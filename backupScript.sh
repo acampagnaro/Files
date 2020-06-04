@@ -8,6 +8,20 @@ echo "------------------- $(date) -------------------"
 
 HOME="/root/"
 
+# Reduz log Cadastros
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
+	USE Cadastros; \
+	GO \
+	ALTER DATABASE Cadastros \
+	SET RECOVERY SIMPLE; \
+	GO \
+	DBCC SHRINKFILE (Cadastros_log, 1); \
+	GO \
+	ALTER DATABASE Cadastros \
+	SET RECOVERY FULL; \
+	GO";
+
+
 # Inicio Do Backup
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
 	DECLARE @name VARCHAR(50) \
