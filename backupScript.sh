@@ -10,17 +10,12 @@ HOME="/root/"
 
 # Reduz log Cadastros
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
-	USE Cadastros; \
-	GO \
+	USE Cadastros \
 	ALTER DATABASE Cadastros \
-	SET RECOVERY SIMPLE; \
-	GO \
-	DBCC SHRINKFILE (Cadastros_log, 1); \
-	GO \
+	SET RECOVERY SIMPLE \
+	DBCC SHRINKFILE (Cadastros_log, 1) \
 	ALTER DATABASE Cadastros \
-	SET RECOVERY FULL; \
-	GO";
-
+	SET RECOVERY FULL";
 
 # Inicio Do Backup
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
