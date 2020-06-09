@@ -10,12 +10,37 @@ HOME="/root/"
 
 # Reduz log Cadastros
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
-	USE Cadastros \
-	ALTER DATABASE Cadastros \
-	SET RECOVERY SIMPLE \
-	DBCC SHRINKFILE (Cadastros_log, 1) \
-	ALTER DATABASE Cadastros \
-	SET RECOVERY FULL";
+	DECLARE @NOME_BANCO VARCHAR(50) \
+	DECLARE @NOME_CLIENTE VARCHAR(50) \
+	DECLARE @SQLEXECUTE VARCHAR(8000) \
+	DECLARE @BackupAWS CURSOR \
+	  SET @BackupAWS = CURSOR FOR \
+	    select \
+		a.name, \
+		b.tbValor \
+	    from sysdatabases as a \
+	    left join clinic.dbo.parametros as b \
+		on 1 = 1 \
+	    where a.name not in ('master', 'tempdb', 'model', 'msdb', 'rdsadmin') and b.tbChave = 'nomecli'; \
+	  OPEN @BackupAWS \
+	  FETCH NEXT \
+	    FROM @BackupAWS INTO @NOME_BANCO, @NOME_CLIENTE \
+	  WHILE @@FETCH_STATUS = 0 \
+	  BEGIN \
+	    SET @SQLEXECUTE = \
+	    ' USE ' + @NOME_BANCO + ' \
+		  ALTER DATABASE ' + @NOME_BANCO + ' \
+		      SET RECOVERY SIMPLE; \
+		  DBCC SHRINKFILE (' + @NOME_BANCO + '_log, 1) \
+		  ALTER DATABASE ' + @NOME_BANCO + ' \
+		      SET RECOVERY FULL \
+		  '\
+	    EXEC(@SQLEXECUTE) \
+	    FETCH NEXT \
+	    FROM @BackupAWS INTO @NOME_BANCO, @NOME_CLIENTE \
+	  End \
+	CLOSE @BackupAWS \
+	DEALLOCATE @BackupAWS";
 
 # Inicio Do Backup
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
