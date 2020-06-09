@@ -7,11 +7,8 @@ echo "--------------------------------------------------------------------------
 echo "------------------- $(date) -------------------"
 
 #Exibe espaço no disco
-echo "Disk Info: "
+echo "Disk Info: -----------------------------"
 df -h
-echo " "
-echo "Files Info: "
-ls -lh /var/opt/mssql/data/
 echo " "
 
 HOME="/root/"
@@ -50,6 +47,11 @@ echo "Reduzindo Logs -----------------------------"
 	  End \
 	CLOSE @BackupAWS \
 	DEALLOCATE @BackupAWS";
+
+# Exibe tamanho dos arquivos
+echo "Files Info: -----------------------------"
+ls -lh /var/opt/mssql/data/
+echo " "
 
 # Inicio Do Backup
 echo "Iniciando backup -----------------------------"
