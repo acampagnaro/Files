@@ -6,9 +6,18 @@ echo " "
 echo "-----------------------------------------------------------------------------"
 echo "------------------- $(date) -------------------"
 
+#Exibe espaço no disco
+echo "Disk Info: "
+df -h
+echo " "
+echo "Files Info: "
+ls -lh /var/opt/mssql/data/
+echo " "
+
 HOME="/root/"
 
-# Reduz log Cadastros
+# Reduz logs
+echo "Reduzindo Logs -----------------------------"
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
 	DECLARE @NOME_BANCO VARCHAR(50) \
 	DECLARE @NOME_CLIENTE VARCHAR(50) \
@@ -43,6 +52,7 @@ HOME="/root/"
 	DEALLOCATE @BackupAWS";
 
 # Inicio Do Backup
+echo "Iniciando backup -----------------------------"
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
 	DECLARE @name VARCHAR(50) \
 	DECLARE @path VARCHAR(256) \
@@ -65,16 +75,23 @@ HOME="/root/"
 	DEALLOCATE db_cursor";
 
 # Compactação .ZIP
+echo "Compactando backup -----------------------------"
 sudo zip -r /home/ubuntu/backup/backup.zip /var/opt/mssql/data/backups
 
 # Upload Para Bucket AWS S3
 echo 'Starting upload...'
 sudo /usr/bin/aws s3 cp /home/ubuntu/backup/backup.zip s3://$BACKUP_BUCKET/backup-$CUSTOMER-$(date +%Y%m%d-%H%M).zip
 
+#Exibe tamanho do backup comprimido
+echo "Tamanho do backup comprimido: "
+ls -lh /home/ubuntu/backup/
+
 # Deletando backup da maquina
+echo "Removendo backup -----------------------------"
 sudo rm /var/opt/mssql/data/backups/*
 sudo rm /home/ubuntu/backup/backup.zip
 
 sleep 5s
 # Reinicia o servidor ao fim do backup
+echo "Rebooting.........."
 sudo reboot
