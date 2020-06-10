@@ -6,5 +6,5 @@ logStuff () {
 	systemctl status mssql-server
 }
 
-(logStuff()) >> a.log
+logStuff() >> a.log
 #rm a.log
