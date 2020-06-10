@@ -1,10 +1,10 @@
 #!/bin/bash
 
-logStuff () {
+function logStuff {
 	df -h
 	ls -lh /var/opt/mssql/data/
 	systemctl status mssql-server
 }
 
-logStuff() >> a.log
+logStuff >> a.log
 #rm a.log
