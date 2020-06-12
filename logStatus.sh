@@ -1,10 +1,15 @@
 #!/bin/bash
 
 function logStuff {
-	df -h
+	df
+	echo "---break----------------------------------------------------"
 	ls -lh /var/opt/mssql/data/
+	echo "---break----------------------------------------------------"
 	systemctl status mssql-server
 }
 
-logStuff >> a.log
-#rm a.log
+DATA="$(logStuff)"
+
+curl --location --request POST "https://spitzer-monitor.herokuapp.com/status-set/$CUSTOMER" \
+--header 'Content-Type: application/json' \
+--data-raw "{\"status\":\"$DATA\"}"
