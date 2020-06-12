@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function logStuff {
+logStuff () {
 	df
 	echo "---break----------------------------------------------------"
 	ls -l /var/opt/mssql/data/
