@@ -1,6 +1,12 @@
 #!/bin/bash
 
-function logStuff { df; echo "---break----------------------------------------------------"; ls -l /var/opt/mssql/data/; echo "---break----------------------------------------------------"; systemctl status mssql-server}
+function logStuff {
+	df
+	echo "---break----------------------------------------------------"
+	ls -l /var/opt/mssql/data/
+	echo "---break----------------------------------------------------"
+	systemctl status mssql-server
+}
 
 DATA="$(logStuff | tr '\r\n' ' ')"
 
