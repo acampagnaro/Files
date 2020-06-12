@@ -8,6 +8,8 @@ DATA="$( (										\
 	systemctl status mssql-server;					\
 ) | tr '\r\n' ' ')"
 
+echo $DATA
+
 curl --location --request POST "https://spitzer-monitor.herokuapp.com/status-set/$CUSTOMER" \
 --header 'Content-Type: application/json' \
 --data-raw "{\"status\":\"$DATA\"}"
