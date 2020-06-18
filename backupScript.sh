@@ -94,6 +94,10 @@ sudo rm /var/opt/mssql/data/backups/*
 sudo rm /home/ubuntu/backup/backup.zip
 
 sleep 5s
+#Atualiza o servidor
+echo "Updating........"
+sudo apt update && sudo apt upgrade
+
 # Reinicia o servidor ao fim do backup
 echo "Rebooting.........."
 sudo reboot
