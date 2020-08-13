@@ -97,7 +97,3 @@ sleep 5s
 #Atualiza o servidor
 echo "Updating........"
 sudo apt update && sudo apt upgrade
-
-# Reinicia o servidor ao fim do backup
-echo "Rebooting.........."
-sudo reboot
