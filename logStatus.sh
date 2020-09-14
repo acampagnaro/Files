@@ -12,6 +12,6 @@ DATA="$( (									\
 	uptime;
 ) | tr '\r\n' ' ')"
 
-curl -k --location --request POST "https://spitzer-monitor.herokuapp.com/status-set/$CUSTOMER" \
+curl -k --location --request POST "https://gugabit-api.herokuapp.com/aws-monitor/status-set/$CUSTOMER" \
 --header 'Content-Type: application/json' \
 --data-raw "{\"status\":\"$DATA\"}"
