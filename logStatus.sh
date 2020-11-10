@@ -5,11 +5,11 @@ DATA="$( (									\
 	echo "---break----------------------------------------------------";	\
 	ls -l /var/opt/mssql/data/;						\
 	echo "---break----------------------------------------------------";	\
-	systemctl status mssql-server;					\
+	systemctl status mssql-server;						\
 	echo "---break----------------------------------------------------";	\
 	free;									\
 	echo "---break----------------------------------------------------";	\
-	uptime;
+	uptime;									\
 	echo "---break----------------------------------------------------";	\
 	cat /etc/hostname;
 ) | tr '\r\n' ' ')"
