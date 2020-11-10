@@ -14,6 +14,6 @@ DATA="$( (									\
 	cat /etc/hostname;
 ) | tr '\r\n' ' ')"
 
-curl -k --location --request POST "https://api.gugabit.com/aws-monitor/status-set/$CUSTOMER" \
+curl -k --location --request POST "http://monitor.clinic.inf.br:8002/aws-monitor/status-set/$CUSTOMER" \
 --header 'Content-Type: application/json' \
 --data-raw "{\"status\":\"$DATA\"}"
