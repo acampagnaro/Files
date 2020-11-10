@@ -10,6 +10,8 @@ DATA="$( (									\
 	free;									\
 	echo "---break----------------------------------------------------";	\
 	uptime;
+	echo "---break----------------------------------------------------";	\
+	cat /etc/hostname;
 ) | tr '\r\n' ' ')"
 
 curl -k --location --request POST "https://api.gugabit.com/aws-monitor/status-set/$CUSTOMER" \
