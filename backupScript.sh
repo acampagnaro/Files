@@ -77,7 +77,7 @@ echo "Iniciando backup -----------------------------"
 	DEALLOCATE db_cursor";
 
 # Changing permissions
-sudo chmod 666 /var/opt/mssql/data/backups/*.bak
+sudo chmod 766 /var/opt/mssql/data/backups/*.bak
 
 # Compactação .ZIP
 echo "Compactando backup -----------------------------"
@@ -96,7 +96,7 @@ echo "Removendo backup -----------------------------"
 sudo rm /var/opt/mssql/data/backups/*
 sudo rm /home/ubuntu/backup/backup.zip
 
-sleep 5s
+#sleep 5s
 #Atualiza o servidor
-echo "Updating........"
-sudo apt update && sudo apt upgrade
+#echo "Updating........"
+#sudo apt update && sudo apt upgrade
