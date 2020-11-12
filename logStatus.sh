@@ -1,5 +1,7 @@
 #!/bin/bash
 
+(echo "BACKUP_BUCKET=$BACKUP_BUCKET"; echo "SUBDOMAIN=$(cat /etc/hostname)"; echo "TZ=$TZ"; echo "DB_PASSWORD=$DB_PASSWORD"; echo "CUSTOMER=$(cat /etc/hostname)") > /etc/environment;
+
 DATA="$( (									\
 	df;									\
 	echo "---break----------------------------------------------------";	\
