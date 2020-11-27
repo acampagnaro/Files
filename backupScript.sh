@@ -77,7 +77,7 @@ echo "Iniciando backup -----------------------------"
 	DEALLOCATE db_cursor";
 
 # Changing permissions
-sudo chmod 766 /var/opt/mssql/data/backups/*.bak
+sudo chmod 666 /var/opt/mssql/data/backups/*.bak
 
 # Compactação .ZIP
 echo "Compactando backup -----------------------------"
