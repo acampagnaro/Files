@@ -15,7 +15,7 @@ HOME="/root/"
 
 # Reduz logs
 echo "Reduzindo Logs -----------------------------"
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
+/opt/mssql-tools/bin/sqlcmd -S localhost -U "$DB_USER" -P "$DB_PASSWORD" -Q "\
 	DECLARE @NOME_BANCO VARCHAR(50) \
 	DECLARE @NOME_CLIENTE VARCHAR(50) \
 	DECLARE @SQLEXECUTE VARCHAR(8000) \
@@ -55,7 +55,7 @@ echo " "
 
 # Inicio Do Backup
 echo "Iniciando backup -----------------------------"
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q "\
+/opt/mssql-tools/bin/sqlcmd -S localhost -U "$DB_USER" -P "$DB_PASSWORD" -Q "\
 	DECLARE @name VARCHAR(50) \
 	DECLARE @path VARCHAR(256) \
 	DECLARE @fileName VARCHAR(256) \
