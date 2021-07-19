@@ -16,7 +16,7 @@ do
   # restaures file
   fileNameNoExt="$(echo "$fileName" | sed 's/\([a-zA-Z -_0-9]*\).bak/\1/')"
 
-  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$DB_PASSWORD" -Q " \
+  /opt/mssql-tools/bin/sqlcmd -S localhost -U "$DB_USER" -P "$DB_PASSWORD" -Q " \
   USE [master] \
   RESTORE DATABASE [$fileNameNoExt] FROM DISK = N'$f' WITH FILE = 1, NOUNLOAD, STATS = 5";
 done
