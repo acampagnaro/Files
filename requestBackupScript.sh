@@ -83,11 +83,13 @@ sudo chmod 666 /var/opt/mssql/data/backups/*.bak
 echo "Compactando backup -----------------------------"
 sudo zip -r /home/ubuntu/backup/backup.zip /var/opt/mssql/data/backups
 
-# Upload Para Bucket AWS S3
-echo 'Starting upload...'
+# Define backup name
 BACKUP_NAME="backup-$CUSTOMER-$(date +%Y%m%d-%H%M).zip"
 echo "BACKUP_NAME=$BACKUP_NAME"
-sudo /usr/bin/aws s3 cp /home/ubuntu/backup/backup.zip s3://risc-clinic-atualizacoes/$BACKUP_NAME
+
+# Upload Para Bucket AWS S3
+echo 'Starting upload...'
+sudo /usr/bin/aws s3 cp /home/ubuntu/backup/backup.zip s3://$BACKUP_BUCKET/$BACKUP_NAME
 
 #Exibe tamanho do backup comprimido
 echo "Tamanho do backup comprimido: "
