@@ -101,6 +101,9 @@ sudo rm /home/ubuntu/backup/backup.zip
 # Atualiza hora do ultimo backup
 curl --location --request POST "https://aws-monitor.spitzer.io/aws-monitor/update-last-backup/$CUSTOMER"
 
+# Log envs
+env
+
 #sleep 5s
 #Atualiza o servidor
 #echo "Updating........"
