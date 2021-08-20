@@ -11,7 +11,9 @@ DATA="$( (									\
 	echo "---break----------------------------------------------------";	\
 	uptime;									\
 	echo "---break----------------------------------------------------";	\
-	cat /etc/hostname;
+	cat /etc/hostname;                                                      \
+	echo "---break----------------------------------------------------";	\
+	curl http://checkip.amazonaws.com;
 ) | tr '\r\n' ' ')"
 
 curl -k --location --request POST "https://aws-monitor.spitzer.io/aws-monitor/status-set/$CUSTOMER" \
