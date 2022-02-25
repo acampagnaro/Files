@@ -3,3 +3,4 @@
 # Este script executa a cada 30 minutos buscando e aplicando atualizações. Use com CUIDADO!
 
 wget -qO- https://gitlab.com/Gugabit/tools/-/raw/main/installBitProxy.sh | sh
+
