@@ -5,7 +5,7 @@
 rm "/home/ubuntu/filesToRestore/*"
 
 # Downloads fresh database
-aws s3 cp s3://risc-clinic-bases-limpas/bases-linux/ /home/ubuntu/filesToRestore --recursive;
+/usr/bin/aws s3 cp s3://risc-clinic-bases-limpas/bases-linux/ /home/ubuntu/filesToRestore --recursive;
 
 # make sure permissions are okay
 chmod 666 /home/ubuntu/filesToRestore/*;
