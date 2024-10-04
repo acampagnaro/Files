@@ -16,6 +16,6 @@ DATA="$( (									\
 	curl http://checkip.amazonaws.com;
 ) | tr '\r\n' ' ')"
 
-curl -k --location --request POST "https://aws-monitor.spitzer.io/aws-monitor/status-set/$CUSTOMER" \
+curl -k --location --request POST "https://aws-monitor.clinic.inf.br/aws-monitor/status-set/$CUSTOMER" \
 --header 'Content-Type: application/json' \
 --data-raw "{\"status\":\"$DATA\"}"
